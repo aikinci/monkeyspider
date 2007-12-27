@@ -42,6 +42,7 @@ def main():
     	
     srch = WebSearch(app_id=sys.argv[1])
     srch.query = sys.argv[2]
+    # only the first 100 results are queryable
     srch.results = sys.argv[3]
     # Disable content filter to get all available results
     srch.adult_ok = 1
