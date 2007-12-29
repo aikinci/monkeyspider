@@ -47,3 +47,6 @@ def main():
     f.close()
 
     # TODO: extract urls found in the mail
+    
+if __name__ == "__main__":
+    main()
