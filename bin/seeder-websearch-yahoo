@@ -21,7 +21,7 @@
 # along with the Monkey-Spider project.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import sys
+import sys, os
 
 try:
     from yahoo.search.web import WebSearch
@@ -30,12 +30,12 @@ except:
     sys.exit(2)
 
 def usage():
-    print '''
-    Usage: seeder-websearch-yahoo '<yahoo-app-id>' '<search-term>' <number of results (max 100)>
-    '''
+    print "Usage: seeder-websearch-yahoo '<yahoo-app-id>' '<search-term>' <number of results (max 100)>"
 
 def main():
 
+    os.system("clear")
+    
     if (len(sys.argv)!= 4):
     	usage()
     	sys.exit(2)

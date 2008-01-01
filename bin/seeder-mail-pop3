@@ -20,16 +20,19 @@
 # You should have received a copy of the GNU General Public License
 # along with the Monkey-Spider project.  If not, see <http://www.gnu.org/licenses/>.
 
-import  poplib, sys
+import  poplib, sys, os
 
 def usage():
-    print '''Usage: seeder-mail-pop3 '<hostname>' '<username>' '<password>' '''
+    print "Usage: seeder-mail-pop3 '<hostname>' '<username>' '<password>'"
 
 def main():
+
+    os.system("clear")
+    
     if (len(sys.argv)!= 4):
     	usage()
     	sys.exit(2)  
-    	
+    
     host=sys.argv[1]    	
     user=sys.argv[2]
     passw=sys.argv[3]
