@@ -20,6 +20,8 @@
 # You should have received a copy of the GNU General Public License
 # along with the Monkey-Spider project.  If not, see <http://www.gnu.org/licenses/>.
 
+clear
+
 #### http://hostsfile.mine.nu
 wget http://hostsfile.mine.nu.nyud.net:8080/Hosts.zip -O hosts.tmp.zip
 unzip -f hosts.tmp.zip

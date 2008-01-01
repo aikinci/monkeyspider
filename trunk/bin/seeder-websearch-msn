@@ -20,7 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with the Monkey-Spider project.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
+import sys, os
 try:
     from SOAPpy import WSDL
 except:
@@ -29,11 +29,11 @@ except:
     
 
 def usage():
-    print '''
-Usage: seeder-websearch-msn '<msn-app-id>' '<search-term>' <number of results (max 250)>
-'''
+    print "Usage: seeder-websearch-msn '<msn-app-id>' '<search-term>' <number of results (max 250)>"
     
 def main():  
+
+    os.system("clear")
 
     if (len(sys.argv)!= 4):
     	usage()
