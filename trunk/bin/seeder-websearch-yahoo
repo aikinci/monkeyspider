@@ -20,6 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with the Monkey-Spider project.  If not, see <http://www.gnu.org/licenses/>.
 
+# Depends on pYsearch from http://pysearch.sourceforge.net/
 
 import sys, os
 
