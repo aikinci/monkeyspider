@@ -3,7 +3,7 @@
 # ms-clamav -   Scans a given directory with clamav. Moves found malware to a 
 #               seperate attic directory and updates the malware database.
 
-# Copyright (C) 2006,2007 Ali Ikinci (ali at ikinci dot info)
+# Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
 #
 # This file is part of the Monkey-Spider project.
 # http://monkeyspider.sourceforge.net
@@ -34,7 +34,7 @@ except:
     sys.exit(2)
     
 def usage():
-    print "Usage: ms-clamav <directory>"
+    print "Usage: ms-scanner-clamav <directory>"
 
 def parseReportFile():
     
@@ -116,8 +116,6 @@ def parseReportFile():
         
 def main():
 
-    os.system("clear")
-
     if (len(sys.argv)!= 2):
         usage()
         sys.exit(2)
@@ -133,12 +131,17 @@ def main():
     #chdir to where the arc file resides
     workdir=sys.argv[1]
     os.chdir(workdir)
+    
+    print 'Scanning folder %s for viruses with ClamAV'%workdir,
+
 
     #Scan directory with clamav and generate report file
     os.system("clamscan -V > clamav.report")
     os.system("clamscan -i --max-ratio=600 |grep FOUND >> clamav.report")
     
     parseReportFile()
+    
+    print '.'
 
         
 if __name__ == "__main__":

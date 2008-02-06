@@ -2,7 +2,7 @@
 
 # seeder-websearch-yahoo - Retrieves Urls from yahoo for a particular websearch
 
-# Copyright (C) 2006,2007 Ali Ikinci (ali at ikinci dot info)
+# Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
 #
 # This file is part of the Monkey-Spider project.
 # (http://monkeyspider.sourceforge.net)
@@ -31,7 +31,7 @@ except:
     sys.exit(2)
 
 def usage():
-    print "Usage: seeder-websearch-yahoo '<yahoo-app-id>' '<search-term>' <number of results (max 100)>"
+    print "Usage: ms-seeder-websearch-yahoo '<yahoo-app-id>' '<search-term>' <number of results (max 100)>"
 
 def main():
 

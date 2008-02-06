@@ -3,7 +3,7 @@
 # extract-arc - Dump all files contained in an Internet Archive ARC File together 
 #               with a cdx index file
 
-# Copyright (C) 2006,2007 Ali Ikinci (ali at ikinci dot info)
+# Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
 #
 # This file is part of the Monkey-Spider project.
 # http://monkeyspider.sourceforge.net
@@ -50,11 +50,9 @@ def stripHeader(filename):
     os.remove(filename)
 
 def usage():
-    print 'Usage: extract-arc [file].arc.gz'
+    print 'Usage: ms-extract-arc <[file].arc.gz>'
 
 def main():
-
-    os.system("clear")
 
     if (len(sys.argv)!= 2):
         usage()
@@ -80,6 +78,8 @@ def main():
     # change workingdir to where the arc file resides
     workdir=os.path.dirname(os.path.abspath(sys.argv[1]))
     os.chdir(workdir)
+
+    print 'Extracting %s'%arcfile,
 
     # create a directory where the arcfile will be extracted, remove an older 
     # one if there is
@@ -124,6 +124,7 @@ def main():
     g.close()
 
     os.system("gzip "+arcfile[:-3])
+    print '.'
 
 if __name__ == "__main__":
     main()
