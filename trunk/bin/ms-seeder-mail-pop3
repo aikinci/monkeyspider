@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-# seeder-mail-pop3 - Retrieves Urls out of emails from a pop3 mail account
+# ms-seeder-mail-pop3 - Retrieves Urls out of emails from a pop3 mail account
 
-# Copyright (C) 2006,2007 Ali Ikinci (ali at ikinci dot info)
+# Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
 #
 # This file is part of the Monkey-Spider project.
 # (http://monkeyspider.sourceforge.net)
@@ -23,7 +23,7 @@
 import  poplib, sys, os
 
 def usage():
-    print "Usage: seeder-mail-pop3 '<hostname>' '<username>' '<password>'"
+    print "Usage: ms-seeder-mail-pop3 '<hostname>' '<username>' '<password>'"
 
 def main():
 
