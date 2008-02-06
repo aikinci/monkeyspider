@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# ms-clamav -   Scans a given directory with clamav. Moves found malware to a 
-#               seperate attic directory and updates the malware database.
+# ms-scanner-clamav - Scans a given directory with clamav. Moves found malware 
+#                     to a seperate attic directory and updates the malware database.
 
 # Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
 #

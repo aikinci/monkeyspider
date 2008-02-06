@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# seeder-websearch-msn - Retrieves Urls from msn live for a particular websearch
+# ms-seeder-websearch-msn - Retrieves Urls from msn live for a particular websearch
 
 # Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
 #
