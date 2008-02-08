@@ -1,0 +1,32 @@
+Installation of the Monkey-Spider:
+
+At first the requierements have to be installed and configured properly:
+
+* Heritrix http://crawler.archive.org
+* PostgreSQL http://postgresql.org
+* ClamAV http://www.clamav.net
+* PyGreSQL http://www.pygresql.org
+* SOAPpy http://pywebsvcs.sourceforge.net
+* pYsearch http://pysearch.sourceforge.net
+
+After that it has to be ensured that the Heritrix binaries are executable and 
+in the PATH environment Variable:
+
+ For example if heritrix was installed in /opt/:
+
+ chmod +x /opt/heritrix-1.12.1/bin/*
+ echo PATH=$PATH:/opt/heritrix-1.12.1/bin >> ~/.bashrc 
+ echo export PATH >> ~/.bashrc 
+
+After that the Monkey-Spider configuration file monkey-spider.conf in etc/ has 
+to be copied or linked to /etc/monkey-spider.conf.
+
+After that the bin/ folder for monkey-spider has to be added to the system path 
+like for Heritrix above:
+ 
+ For example if monkey-spider was copied to /opt/:
+
+ echo PATH=$PATH:/opt/monkey-spider/bin >> ~/.bashrc 
+ echo export PATH >> ~/.bashrc
+
+That's it.
