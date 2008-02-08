@@ -9,8 +9,13 @@ At first the requierements have to be installed and configured properly:
 * SOAPpy http://pywebsvcs.sourceforge.net
 * pYsearch http://pysearch.sourceforge.net
 
-After that it has to be ensured that the Heritrix binaries are executable and 
+It has to be ensured that the Heritrix binaries are executable and 
 in the PATH environment Variable:
+
+ To test this the command: 
+ which heritrix
+ should output the folder where heritrix is installed in. If nothing appears 
+ follow the example below.
 
  For example if heritrix was installed in /opt/:
 
@@ -18,15 +23,12 @@ in the PATH environment Variable:
  echo PATH=$PATH:/opt/heritrix-1.12.1/bin >> ~/.bashrc 
  echo export PATH >> ~/.bashrc 
 
-After that the Monkey-Spider configuration file monkey-spider.conf in etc/ has 
-to be copied or linked to /etc/monkey-spider.conf.
+To install the monkey-spider version 0.1 run the install.sh script as root.
+To uninstall run uninstall.sh.
 
-After that the bin/ folder for monkey-spider has to be added to the system path 
-like for Heritrix above:
- 
- For example if monkey-spider was copied to /opt/:
-
- echo PATH=$PATH:/opt/monkey-spider/bin >> ~/.bashrc 
- echo export PATH >> ~/.bashrc
+Additionally the database scheme for the malware database has to be committed to
+the database. It is located in /usr/share/monkey-spider-0.1/examples/mw-db-scheme.sql
+and can be commited with the command:
+psql -f mw-db-scheme.sql malwaredb
 
 That's it.
