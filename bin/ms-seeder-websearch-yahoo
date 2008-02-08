@@ -22,6 +22,9 @@
 
 # Depends on pYsearch from http://pysearch.sourceforge.net/
 
+# A valid Yahoo Application ID is necessary to use this Web Service. It can be
+# obtained from http://developer.yahoo.com/wsregapp/ 
+
 import sys, os
 
 try:
