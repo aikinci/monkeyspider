@@ -22,6 +22,9 @@
 
 # depends on SOAPpy from http://pywebsvcs.sourceforge.net/
 
+# A valid Live ID is necessary to use this Web Service. It can be obtained from 
+# http://dev.live.com/liveid/
+
 import sys, os
 try:
     from SOAPpy import WSDL
