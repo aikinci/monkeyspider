@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-# ms-seeder-websearch-yahoo - Retrieves Urls from yahoo for a particular websearch
+# ms-seeder-websearch-yahoo - Retrieves Urls from the Yahoo! Search Web Service
+#                             for a particular Web search
 
 # Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
 #
@@ -38,8 +39,6 @@ def usage():
 
 def main():
 
-    os.system("clear")
-    
     if (len(sys.argv)!= 4):
     	usage()
     	sys.exit(2)
