@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-# ms-seeder-websearch-msn - Retrieves Urls from msn live for a particular websearch
+# ms-seeder-websearch-livesearch - Retrieves Urls from the Windows Live Search
+#                                  Web Service for a particular Web search
 
 # Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
 #
@@ -34,11 +35,9 @@ except:
     
 
 def usage():
-    print "Usage: ms-seeder-websearch-msn '<msn-app-id>' '<search-term>' <number of results (max 250)>"
+    print "Usage: ms-seeder-websearch-livesearch '<live-id>' '<search-term>' <number of results (max 250)>"
     
 def main():  
-
-    os.system("clear")
 
     if (len(sys.argv)!= 4):
     	usage()
@@ -47,7 +46,7 @@ def main():
     wsdl_url = 'http://soap.search.msn.com/webservices.asmx?wsdl'
     server = WSDL.Proxy(wsdl_url)
 
-    #search results are restricted to 250
+    # search results are restricted to 250
 
     AppID=sys.argv[1]
     query=sys.argv[2]
@@ -55,7 +54,8 @@ def main():
     # number of results, currently not functional
     num_results=sys.argv[3]
 
-    #always delivery 250 results
+    # always delivery 250 results
+    # TODO use the num_results variable to deliver a certain amount of results
     for offset in (0,50,100,150,200):
         params = {
             'AppID': AppID,
@@ -66,7 +66,7 @@ def main():
             'SourceRequest':{
             'Source': 'Web',
             'Offset': offset,
-            #Count is restricted to 50 results at once
+            # Count is restricted to 50 results at once
             'Count': 50,
             'ResultFields': 'All',
             }}
