@@ -1,0 +1,19 @@
+Release notes for Monkey-Spider version 0.1
+===========================================
+
+This is the first public release of the Monkey-Spider system. The scripts are 
+working stable but there hasn't been yet an in deep testing of them by others.
+
+Unsolved Issues:
+ -  The ms-seeder-mail-pop3 script is not yet able to extract links out of crawled
+    mails. A regular expression matching has to be implemented for this issue.
+ -  The ms-scanner-clamav script is not using all three tables of the database
+    but only one. That leads to an insufficient data storage in the databas regarding
+    the version information of the used malware scanner provided in the table
+    mw_scanner holding the name the program version and the signature version of
+    the malware scanner which has the detected the malware sample and the table 
+    mw_output which holds the particular name which might be unique to a certain
+    malware scanner and/or program version of such. This might not be a big problem
+    in the first place because at least the malware name is still stored in the
+    comment column inside of the first used malware table. This will be fixed in 
+    any of the later versions.
