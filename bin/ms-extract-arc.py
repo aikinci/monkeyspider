@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# ms-extract-arc - Dump all files contained in an Internet Archive ARC File together 
+# ms-extract-arc - Dump all files contained in an Internet Archive ARC File together
 #                  with a cdx index file
 
 # Copyright (C) 2006-2008 Ali Ikinci (ali at ikinci dot info)
@@ -23,38 +23,41 @@
 
 # depends on the acreader tool from the Heritrix package
 
-from os.path import abspath,getsize,basename
+import sys
+
+import mimetypes
 import os
-import sys, string, mimetypes, re
+import re
+import string
 
 def stripHeader(filename):
     # strip the protocol header from the file contents
-    file=open(filename,'r')
+    file = open(filename, 'r')
 
-    idx=0
+    idx = 0
 
-    isFirstLine=True
+    isFirstLine = True
     while True:
-        result=re.compile(":").search(file.readline())
-        idx=file.tell()
-        if result==None and isFirstLine==False:
+        result = re.compile(":").search(file.readline())
+        idx = file.tell()
+        if result == None and isFirstLine == False:
             break
-        isFirstLine=False
+        isFirstLine = False
 
     file.seek(idx)
-    outfile=open(filename[:-4],"w")
+    outfile = open(filename[:-4], "w")
     outfile.write(file.read())
     outfile.close()
-    
+
     file.close()
     os.remove(filename)
 
 def usage():
-    print 'Usage: ms-extract-arc <[file].arc.gz>'
+    print 'Usage: ms-extract-arc.py [filename].arc.gz'
 
 def main():
 
-    if (len(sys.argv)!= 2):
+    if (len(sys.argv) != 2):
         usage()
         sys.exit(2)
 
@@ -64,67 +67,69 @@ def main():
         sys.exit(2)
 
     if not os.path.isfile(sys.argv[1]):
-        usage()        
+        usage()
         sys.exit(2)
 
-    if sys.argv[1][-7:]!=".arc.gz":
+    if sys.argv[1][-7:] != ".arc.gz":
         usage()
         print "Error: File is not in *.arc.gz Format"
         sys.exit(2)
 
 
-    arcfile=os.path.basename(sys.argv[1])
+    arcfile = os.path.basename(sys.argv[1])
 
     # change workingdir to where the arc file resides
-    workdir=os.path.dirname(os.path.abspath(sys.argv[1]))
+    workdir = os.path.dirname(os.path.abspath(sys.argv[1]))
     os.chdir(workdir)
 
-    print 'Extracting %s'%arcfile,
+    print 'Extracting %s' % arcfile,
 
-    # create a directory where the arcfile will be extracted, remove an older 
+    # create a directory where the arcfile will be extracted, remove an older
     # one if there is
-    arcdir=arcfile[:-7]
+    arcdir = arcfile[:-7]
     if os.path.exists(arcdir):
-        os.system("rm -rf "+arcdir)
-    os.system("mkdir "+arcdir)
-    os.system("gunzip "+arcfile)
+        os.system("rm -rf " + arcdir)
+    os.system("mkdir " + arcdir)
+    os.system("gunzip " + arcfile)
 
     # generate cdx file with the arcreader tool from the Heritrix package
-    cdxfile=arcfile[:-6]+"cdx"
-    os.system("arcreader -d true  "+arcfile[:-3]+" > "+arcdir+"/"+cdxfile)
+    cdxfile = arcfile[:-6] + "cdx"
+    arcreaderinput = os.path.abspath(arcfile[:-3])
+    os.system("arcreader -d true  " + arcreaderinput + " > " + cdxfile + ".tmp")
+    os.system("mv " + cdxfile + ".tmp " + cdxfile)
 
     # open the cdxfile
-    f=open(arcdir+"/"+cdxfile,"r")
-    cdx=f.readlines()
+    f = open(cdxfile, "r")
+    cdx = f.readlines()
     f.close()
 
-    g=open(arcfile[:-3],"r")
+    g = open(arcfile[:-3], "r")
 
-    for x in range(2,len(cdx)):
-        archiveThisFile=False
-        cdxstring=string.split(cdx[x])
+    for x in range(2, len(cdx)):
+        archiveThisFile = False
+        cdxstring = string.split(cdx[x])
 
         # generate file name
-        fext=mimetypes.guess_extension( cdxstring[3])
-        if (fext==None):
-            fext=".raw"
-     
-        findex=cdxstring[5]    
-        fname=findex+fext
+        fext = mimetypes.guess_extension(cdxstring[3])
+        if (fext == None):
+            fext = ".raw"
+
+        findex = cdxstring[5]
+        fname = findex + fext
 
         # Seek to the right position
         g.seek(int(cdxstring[6]))
         g.readline()
-        h=open(arcdir+"/"+fname+".tmp","w")
+        h = open(arcdir + "/" + fname + ".tmp", "w")
         h.write(g.read(int(cdxstring[7])))
         h.close()
 
-        stripHeader(arcdir+"/"+fname+".tmp")
+        stripHeader(arcdir + "/" + fname + ".tmp")
 
     g.close()
 
-    os.system("gzip "+arcfile[:-3])
-    print '.'
+    os.system("gzip " + arcfile[:-3])
+    print 'Done  extracting %s'%arcfile
 
 if __name__ == "__main__":
     main()
