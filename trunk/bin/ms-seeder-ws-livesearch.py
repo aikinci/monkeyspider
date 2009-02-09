@@ -26,7 +26,8 @@
 # A valid Live ID is necessary to use this Web Service. It can be obtained from 
 # http://dev.live.com/liveid/
 
-import sys, os
+import sys
+
 try:
     from SOAPpy import WSDL
 except:
@@ -39,7 +40,7 @@ def usage():
     
 def main():  
 
-    if (len(sys.argv)!= 4):
+    if (len(sys.argv) != 4):
     	usage()
     	sys.exit(2)  
 
@@ -48,15 +49,15 @@ def main():
 
     # search results are restricted to 250
 
-    AppID=sys.argv[1]
-    query=sys.argv[2]
+    AppID = sys.argv[1]
+    query = sys.argv[2]
     
     # number of results, currently not functional
-    num_results=sys.argv[3]
+    num_results = sys.argv[3]
 
     # always delivery 250 results
     # TODO use the num_results variable to deliver a certain amount of results
-    for offset in (0,50,100,150,200):
+    for offset in (0, 50, 100, 150, 200):
         params = {
             'AppID': AppID,
             'Query': query,

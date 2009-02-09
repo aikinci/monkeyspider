@@ -24,8 +24,12 @@
 # depends on clamav from http://www.clamav.net and pygresql from 
 # http://www.pygresql.org/
 
-import os, sys, string, ConfigParser
 from os.path import basename
+import sys
+
+import ConfigParser
+import os
+import string
 
 try:
     import pg
@@ -34,89 +38,89 @@ except:
     sys.exit(2)
     
 def usage():
-    print "Usage: ms-scanner-clamav <directory>"
+    print "Usage: ms-scanner-clamav.py [directory]"
 
 def parseReportFile():
     
-    config=ConfigParser.ConfigParser()
+    config = ConfigParser.ConfigParser()
     config.read("/etc/monkey-spider.conf")
     try:
-        dbName=config.get('ms-database','databasename')
-        dbHost=config.get('ms-database','hostname')
-        dbUser=config.get('ms-database','username')
-        dbPass=config.get('ms-database','password')
-        mwattic=config.get('ms-scanner','mwattic')
+        dbName = config.get('ms-database', 'databasename')
+        dbHost = config.get('ms-database', 'hostname')
+        dbUser = config.get('ms-database', 'username')
+        dbPass = config.get('ms-database', 'password')
+        mwattic = config.get('ms-scanner', 'mwattic')
     except:
         print 'Unable to read configuration. Check the configuration file.'
         exit(2)
 
     #create attic for collected malware-binarys
-    os.system("mkdir -p %s"%mwattic)
+    os.system("mkdir -p %s" % mwattic)
 
     #cdx file name
-    cdxfile= basename(os.getcwd())+".cdx"
+    cdxfile = basename(os.getcwd()) + ".cdx"
 
-    f=open(cdxfile,"r")
-    cdx=f.readlines()
+    f = open(cdxfile, "r")
+    cdx = f.readlines()
     f.close()
 
     # checksum index of the files for the reassosiaction of found malware
-    cix={}
+    cix = {}
     for x in range(len(cdx)):
-        cix[x]=string.split(cdx[x])[5]
+        cix[x] = string.split(cdx[x])[5]
 
-    f=open("clamav.report","r")
-    clamav=f.readlines()
+    f = open("clamav.report", "r")
+    clamav = f.readlines()
     f.close()
     
-    clamav_engine_version = string.split(string.split(clamav[0])[1],"/")[0]
-    clamav_signature_version = string.split(string.split(clamav[0])[1],"/")[1]
-    clamav_last_update = string.split(clamav[0],"/")[2][:-1]
+    clamav_engine_version = string.split(string.split(clamav[0])[1], "/")[0]
+    clamav_signature_version = string.split(string.split(clamav[0])[1], "/")[1]
+    clamav_last_update = string.split(clamav[0], "/")[2][:-1]
 
-    for i in range(1,len(clamav)):
-        mw_name= string.split(clamav[i])[1]
-        mw_filename = string.split(string.split(clamav[i])[0],":")[0]
-        mw_checksum = string.split((string.split(string.split(string.split(clamav[i])[0],":")[0],"/")[-1]),".")[0]
+    for i in range(1, len(clamav)):
+        mw_name = string.split(clamav[i])[1]
+        mw_filename = string.split(string.split(clamav[i])[0], ":")[0]
+        mw_checksum = string.split((string.split(string.split(string.split(clamav[i])[0], ":")[0], "/")[-1]), ".")[0]
         try:
-            db=pg.connect(dbname=dbName,host=dbHost,user=dbUser,passwd=dbPass)
+            db = pg.connect(dbname=dbName, host=dbHost, user=dbUser, passwd=dbPass)
         except:
             print 'Unable to connect to database. Check your configuration.'
             exit(2)
     
-        os.system("cp -u "+mw_filename+" %s"%mwattic)
+        os.system("cp -u " + mw_filename + " %s" % mwattic)
 
         #Generate the next ids for databases malware and mw_scanner
-        q=db.query("SELECT max(id) from malware")
-        max_mw_id=q.getresult()[0][0]
-        if max_mw_id==None :
-            max_mw_id=1
+        q = db.query("SELECT max(id) from malware")
+        max_mw_id = q.getresult()[0][0]
+        if max_mw_id == None:
+            max_mw_id = 1
         else:
-            max_mw_id=max_mw_id+1
+            max_mw_id = max_mw_id + 1
 
-        q=db.query("SELECT max(id) from mw_scanner")
-        max_mw_sc_id=q.getresult()[0][0]
-        if max_mw_sc_id==None :
-            max_mw_sc_id=1
+        q = db.query("SELECT max(id) from mw_scanner")
+        max_mw_sc_id = q.getresult()[0][0]
+        if max_mw_sc_id == None:
+            max_mw_sc_id = 1
         else:
-            max_mw_sc_id=max_mw_sc_id+1
+            max_mw_sc_id = max_mw_sc_id + 1
 
-        id=max_mw_id
-        filename=basename(mw_filename)
-        checksum=string.split(basename(mw_filename),".")[0]
+        id = max_mw_id
+        filename = basename(mw_filename)
+        checksum = string.split(basename(mw_filename), ".")[0]
         for x in range(len(cix)):
-            if cix[x]==checksum:            
+            if cix[x] == checksum:
                 break
-        url=string.split(cdx[x])[2].lower()
-        size=0
-        date=string.split(cdx[x])[0]
-        dateS=date[:4]+"-"+date[4:6]+"-"+date[6:8]+" "+date[8:10]+":"+date[10:12]+":"+date[12:14]
-        q="INSERT INTO malware VALUES (%s,'%s','%s','%s',%s,'%s','%s')"%(id,filename,url,checksum,size,dateS,mw_name)
+        url = string.split(cdx[x])[2].lower()
+        size = 0
+        date = string.split(cdx[x])[0]
+        dateS = date[:4] + "-" + date[4:6] + "-" + date[6:8] + " " + date[8:10] + ":" + date[10:12] + ":" + date[12:14]
+        q = "INSERT INTO malware VALUES (%s,'%s','%s','%s',%s,'%s','%s')" % (id, filename, url, checksum, size, dateS, mw_name)
         db.query(q)
         db.close()
         
 def main():
 
-    if (len(sys.argv)!= 2):
+    if (len(sys.argv) != 2):
         usage()
         sys.exit(2)
 
@@ -129,10 +133,10 @@ def main():
         sys.exit(2)
 
     #chdir to where the arc file resides
-    workdir=sys.argv[1]
+    workdir = sys.argv[1]
     os.chdir(workdir)
     
-    print 'Scanning folder %s for viruses with ClamAV'%workdir,
+    print 'Scanning folder %s for viruses with ClamAV' % workdir,
 
 
     #Scan directory with clamav and generate report file

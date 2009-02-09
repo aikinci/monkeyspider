@@ -2,12 +2,12 @@ Installation of the Monkey-Spider:
 
 At first the requierements have to be installed and configured properly:
 
-* Heritrix http://crawler.archive.org
+* Heritrix http://crawler.archive.org (1.x or 2.x)
 * PostgreSQL http://postgresql.org
 * ClamAV http://www.clamav.net
 * PyGreSQL http://www.pygresql.org
-* SOAPpy http://pywebsvcs.sourceforge.net
-* pYsearch http://pysearch.sourceforge.net
+* SOAPpy http://pywebsvcs.sourceforge.net (for MSN/Live search)
+* pYsearch http://pysearch.sourceforge.net (for Yahoo)
 
 It has to be ensured that the Heritrix binaries are executable and 
 in the PATH environment Variable:

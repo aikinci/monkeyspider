@@ -21,13 +21,18 @@
 # You should have received a copy of the GNU General Public License
 # along with the Monkey-Spider project. If not, see http://www.gnu.org/licenses/
 
-import os,os.path,sys,re,popen2
+import os.path
+import sys
+
+import os
+import popen2
+import re
 
 def usage():
-    print 'ms-processfolder <folder-with-ARC-files>'
+    print 'ms-processfolder.py [folder/with/ARC/files/]'
 
 def main():
-    if (len(sys.argv)!= 2):
+    if (len(sys.argv) != 2):
         usage()
         exit(2)
 
@@ -40,27 +45,27 @@ def main():
         usage()
         exit(2)
 
-    arcsdir=os.path.abspath(sys.argv[1])
+    arcsdir = os.path.abspath(sys.argv[1])
 
     os.chdir(arcsdir)
 
-    fl=os.listdir('.')
-    filelist=[]
+    fl = os.listdir('.')
+    filelist = []
 
     for x in fl:
         if re.compile(".arc.gz$").search(x, 1):
             filelist.append(x)  
     
     
-    st=open('status.log','w')
+    st = open('status.log', 'w')
 
-    st.write('Processing ARC files in Folder: %s \n'%os.getcwd())
+    st.write('Processing ARC files in Folder: %s \n' % os.getcwd())
     
     for x in filelist:
-        arcfile=os.path.abspath(x)
-        st.write('ms-extract-arc:\t\t'+popen2.popen4("ms-extract-arc "+arcfile)[0].read())
-        st.write('ms-scanner-clamav:\t'+popen2.popen4("ms-scanner-clamav "+arcfile[:-7])[0].read())
-        st.write(popen2.popen3("rm -rf %s"%arcfile[:-7])[2].read())        
+        arcfile = os.path.abspath(x)
+        st.write('ms-extract-arc:\t\t' + popen2.popen4("ms-extract-arc.py " + arcfile)[0].read())
+        st.write('ms-scanner-clamav:\t' + popen2.popen4("ms-scanner-clamav.py " + arcfile[:-7])[0].read())
+        st.write(popen2.popen3("rm -rf %s" % arcfile[:-7])[2].read())
 
     st.write('Done!\n')
     st.close()

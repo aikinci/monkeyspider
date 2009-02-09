@@ -26,7 +26,8 @@
 # A valid Yahoo Application ID is necessary to use this Web Service. It can be
 # obtained from http://developer.yahoo.com/wsregapp/ 
 
-import sys, os
+import sys
+
 
 try:
     from yahoo.search.web import WebSearch
@@ -39,7 +40,7 @@ def usage():
 
 def main():
 
-    if (len(sys.argv)!= 4):
+    if (len(sys.argv) != 4):
     	usage()
     	sys.exit(2)
     	
@@ -49,10 +50,10 @@ def main():
     srch.results = sys.argv[3]
     # Disable content filter to get all available results
     srch.adult_ok = 1
-    LinkIdx=0    
+    LinkIdx = 0
 	
     for res in srch.parse_results():
-        LinkIdx=LinkIdx+1
+        LinkIdx = LinkIdx + 1
         print res.Url
 
 
