@@ -1,3 +1,5 @@
+--$Id$
+
 -- db scheme for monkey-spider
 DROP TABLE mw_output;
 DROP TABLE malware;
