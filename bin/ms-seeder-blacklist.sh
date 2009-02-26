@@ -1,5 +1,5 @@
-#! /bin/sh
 #$Id$
+#!/bin/sh
 
 # ms-seeder-blacklist.sh - load hosts files from several places of the internet and 
 #                    add them to one urllist
@@ -21,6 +21,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with the Monkey-Spider project.  If not, see <http://www.gnu.org/licenses/>.
+
 echo This script downloads and concatenates hosts from various hosts file providers
 # Check if required programs are installed
 echo Checking installed programs first
