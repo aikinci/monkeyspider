@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#$Id$
 
 # ms-seeder-websearch-yahoo - Retrieves Urls from the Yahoo! Search Web Service
 #                             for a particular Web search
