@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#$Id$
 
 # ms-scanner-clamav - Scans a given directory with clamav. Moves found malware 
 #                     to a seperate attic directory and updates the malware database.

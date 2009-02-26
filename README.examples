@@ -1,3 +1,5 @@
+$Id$
+
 In the examples folder there is an example for an ARC file which hold a couple
 files and an EICAR testsignature. So the ms-processfolder script can be tested 
 by giving this folder as input.

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#$Id$
 
 # ms-seeder-websearch-livesearch - Retrieves Urls from the Windows Live Search
 #                                  Web Service for a particular Web search

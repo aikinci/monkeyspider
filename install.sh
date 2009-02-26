@@ -1,4 +1,6 @@
 #!/bin/sh
+#$Id$
+
 # Installation script for monkey-spider version 0.1
 chmod +x bin/*
 cp -r bin/* /usr/bin/

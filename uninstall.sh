@@ -1,4 +1,6 @@
 #!/bin/sh
+#$Id$
+
 # Uninstallation script for monkey-spider version 0.1
 
 rm -f /usr/bin/ms-*

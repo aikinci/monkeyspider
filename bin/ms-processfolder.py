@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#$Id$
 
 # ms-processfolder - Examines a given directory with ARC files utilizing the  
 # 		             available scanner modules

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#$Id$
 
 # ms-extract-arc - Dump all files contained in an Internet Archive ARC File together
 #                  with a cdx index file

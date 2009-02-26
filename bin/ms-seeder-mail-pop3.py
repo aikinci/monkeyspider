@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#$Id$
 
 # ms-seeder-mail-pop3 - Retrieves Urls out of emails from a pop3 mail account
 
