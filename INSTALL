@@ -4,7 +4,7 @@ Installation of the Monkey-Spider:
 
 At first the requierements have to be installed and configured properly:
 
-* Heritrix http://crawler.archive.org (1.x or 2.x)
+* Heritrix http://crawler.archive.org (1.x or 2.x works with both)
 * PostgreSQL http://postgresql.org
 * ClamAV http://www.clamav.net
 * PyGreSQL http://www.pygresql.org
@@ -25,12 +25,14 @@ in the PATH environment Variable:
  echo PATH=$PATH:/opt/heritrix-1.12.1/bin >> ~/.bashrc 
  echo export PATH >> ~/.bashrc 
 
-To install the monkey-spider version 0.1 run the install.sh script as root.
+To install the monkey-spider version 0.2 run the install.sh script as root.
 To uninstall run uninstall.sh.
 
-Additionally the database scheme for the malware database has to be committed to
-the database. It is located in /usr/share/monkey-spider-0.1/examples/mw-db-scheme.sql
-and can be commited with the command:
+Additionally the database scheme for the malware database has to be committed
+ to the database. It is located in 
+/usr/share/monkeyspider/examples/mw-db-scheme.sql and can be commited 
+with the command: 
+
 psql -f mw-db-scheme.sql malwaredb
 
 That's it.

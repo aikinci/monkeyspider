@@ -22,7 +22,7 @@
 # You should have received a copy of the GNU General Public License
 # along with the Monkey-Spider project. If not, see http://www.gnu.org/licenses/
 
-# depends on the acreader tool from the Heritrix package
+# depends on the acreader tool from the Heritrix package (http://crawler.archive.org)
 
 import sys
 
