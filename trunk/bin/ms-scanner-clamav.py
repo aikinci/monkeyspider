@@ -139,10 +139,9 @@ def main():
     
     print 'Scanning folder %s for viruses with ClamAV' % workdir,
 
-
     #Scan directory with clamav and generate report file
-    os.system("clamscan -V > clamav.report")
-    os.system("clamscan -i --max-ratio=600 |grep FOUND >> clamav.report")
+    os.system("clamdscan -V > clamav.report")
+    os.system("clamdscan |grep FOUND >> clamav.report")
     
     parseReportFile()
     

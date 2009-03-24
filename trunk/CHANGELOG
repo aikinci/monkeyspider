@@ -1,0 +1,7 @@
+$ID$
+from 0.1 to 0.2
+
+- Updated the blacklist seeder to work fully again and added support for the 7zip format
+- Updated the extractor script to work with the new 2.x branch of Heritrix that makes MS compatible with the new crawler version
+- MS makes now use of clamav-daemon to speedup the malware scan. This gives 100% utilization on all available processors and the best possible performance with clamav
+- Some code cleanups
