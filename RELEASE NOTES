@@ -6,6 +6,14 @@ Release notes for Monkey-Spider version 0.2
 This is the second release of the Monkey-Spider system. The scripts are 
 working stable but there hasn't been yet an in deep testing of them by others.
 
+New:
+ - Updated the blacklist seeder to work again together with support for 7zip packed
+   hostlist providers
+ - Updated the extractor script to work with the new 2.x branch of Heritrix that makes MS
+   compatible with the new crawler version
+ - MS makes now use of clamav-daemon to speedup the malware scan. This gives 100% utilization
+   on all available processors and the best possible performance with clamav
+
 Unsolved Issues:
  -  The ms-seeder-mail-pop3 script is not yet able to extract links out of crawled
     mails. A regular expression matching has to be implemented for this issue.
