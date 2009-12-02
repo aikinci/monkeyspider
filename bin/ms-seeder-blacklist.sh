@@ -25,7 +25,7 @@
 echo This script downloads and concatenates hosts from various hosts file providers
 # Check if required programs are installed
 echo Checking installed programs first
-for CMD in awk sed wget unzip grep p7zip; do
+for CMD in awk sed wget unzip grep; do
    type $CMD &> /dev/null
    if [ $? != "0" ]; then
       echo "The command '$CMD' is required and is not in your path."
@@ -55,10 +55,11 @@ cat hoststmp/HOSTS >> hosts
 rm -rf hoststmp hosts.tmp.zip
 
 #### http://www.hostsfile.org/hosts.html
-wget http://www.hostsfile.org/Downloads/BadHosts.unx.7z -O hosts.tmp.7z
-p7zip -d hosts.tmp.7z
+wget http://www.hostsfile.org/Downloads/BadHosts.unx.zip -O hosts.tmp.zip
+unzip hosts.tmp.zip
+rm BadHosts.unx/*.sig
 find BadHosts.unx -iname "add.*" -exec cat {} >> hosts \;
-rm -rf hosts.tmp.7z BadHosts.unx
+rm -rf hosts.tmp.zip BadHosts.unx
 
 #### http://hosts-file.net/
 wget http://hosts-file.net/download/hphosts.zip -O hosts.tmp.zip
