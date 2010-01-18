@@ -141,7 +141,7 @@ def main():
 
     #Scan directory with clamav and generate report file
     os.system("clamdscan -V > clamav.report")
-    os.system("clamdscan --fdpass |grep FOUND >> clamav.report")
+    os.system("clamdscan -m --fdpass |grep FOUND >> clamav.report")
     
     parseReportFile()
     
